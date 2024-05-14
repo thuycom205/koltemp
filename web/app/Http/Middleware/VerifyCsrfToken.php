@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Middleware;
+namespace App\Http\Middlewarex;
 
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken as Middleware;
 
@@ -12,8 +12,8 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
-        'api/products/count',
-        'api/products',
+        'api/*',
+
         'api/graphql',
         'api/webhooks',
     ];

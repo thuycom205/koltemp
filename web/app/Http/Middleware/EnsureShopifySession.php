@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Middleware;
+namespace App\Http\Middlewarex;
 
 use App\Exceptions\ShopifyBillingException;
 use App\Lib\AuthRedirection;
@@ -100,4 +100,10 @@ class EnsureShopifySession
 
         return TopLevelRedirection::redirect($request, "/api/auth?shop=$shop");
     }
+    protected $except = [
+        'api/*',
+
+        'api/graphql',
+        'api/webhooks',
+    ];
 }

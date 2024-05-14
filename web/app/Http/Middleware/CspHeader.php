@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Middleware;
+namespace App\Http\Middlewarex;
 
 use Closure;
 use Illuminate\Http\Request;
@@ -21,6 +21,9 @@ class CspHeader
      */
     public function handle(Request $request, Closure $next)
     {
+        if ($request->is('*.js') || $request->is('*.png') || $request->is('*.ico') || $request->is('*.css')) {
+            return $next($request);
+        }
         $shop = Utils::sanitizeShopDomain($request->query('shop', ''));
 
         if (Context::$IS_EMBEDDED_APP) {
@@ -61,4 +64,10 @@ class CspHeader
 
         return $response;
     }
+
+    protected $except = [
+        'api/*',
+        'api/graphql',
+        'api/webhooks',
+    ];
 }

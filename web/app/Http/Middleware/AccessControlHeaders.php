@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Middleware;
+namespace App\Http\Middlewarex;
 
 use Closure;
 use Illuminate\Http\Request;
@@ -18,6 +18,9 @@ class AccessControlHeaders
      */
     public function handle(Request $request, Closure $next)
     {
+        if ($request->is('*.js') || $request->is('*.png') || $request->is('*.ico') || $request->is('*.css')) {
+            return $next($request);
+        }
         if (Context::$IS_EMBEDDED_APP) {
 
             /** @var Response $response */
